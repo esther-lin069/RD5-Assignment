@@ -13,23 +13,31 @@ if(isset($_POST['submit'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql_customer = "insert into `customer` values (null,'$firstName','$lastName','$photoId','$phone','$email')";
-    mysqli_query($link,$sql_customer);
-    $inserted = mysqli_insert_id($link);
+    try{
+        $sql_customer = "insert into `customer` values (null,'$firstName','$lastName','$photoId','$phone','$email')";
+        mysqli_query($link,$sql_customer);
+        $inserted = mysqli_insert_id($link);
 
-    $sql_register = "insert into `register` values (null, $inserted,'$username','$password')";
-    mysqli_query($link,$sql_register);
+        $sql_register = "insert into `register` values (null, $inserted,'$username','$password')";
+        mysqli_query($link,$sql_register);
 
-    $iNum = str_pad($inserted, 7, '0', STR_PAD_LEFT);
-    $accountNum = date("yymd").$iNum;
-    echo($accountNum);
+        $iNum = str_pad($inserted, 7, '0', STR_PAD_LEFT);
+        $accountNum = date("yymd").$iNum;
+        echo($accountNum);
 
-    $sql_account = "insert into `account` values (null, $inserted,'$accountNum',0)";
-    mysqli_query($link,$sql_account);
+        $sql_account = "insert into `account` values (null, $inserted,'$accountNum',0)";
+        mysqli_query($link,$sql_account);
+    }
+    catch(Exception $e){
+        echo 'Message:' .$e->getMessage();
+    }
 
-mysqli_close($link);
+    
+
+    header("Location: login.php");
+    mysqli_close($link);
+
 }
-
 
 
 ?>

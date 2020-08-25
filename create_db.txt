@@ -1,0 +1,71 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+CREATE DATABASE IF NOT EXISTS `RD5-Assignment` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `RD5-Assignment`;
+
+CREATE TABLE `account` (
+  `accountId` int(5) NOT NULL,
+  `customerId` int(5) NOT NULL,
+  `accountNum` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `accountBalance` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `account` (`accountId`, `customerId`, `accountNum`, `accountBalance`) VALUES
+(1, 1, '202008250000001', 0);
+
+CREATE TABLE `customer` (
+  `customerId` int(5) NOT NULL,
+  `firstName` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `lastName` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `photoId` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(60) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `customer` (`customerId`, `firstName`, `lastName`, `photoId`, `phone`, `email`) VALUES
+(1, 'esther', 'lin', 'A123456789', '0910234567', 'esther@gmail.com');
+
+CREATE TABLE `register` (
+  `registerId` int(5) NOT NULL,
+  `customerId` int(5) NOT NULL,
+  `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `register` (`registerId`, `customerId`, `username`, `password`) VALUES
+(1, 1, 'Esther', '123');
+
+CREATE TABLE `transaction` (
+  `transId` int(10) NOT NULL,
+  `accountId` int(5) NOT NULL,
+  `transAccount` int(5) NOT NULL,
+  `transType` enum('提款','存款','轉帳') COLLATE utf8_unicode_ci NOT NULL,
+  `transAmount` int(10) NOT NULL,
+  `transDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`accountId`);
+
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`customerId`);
+
+ALTER TABLE `register`
+  ADD PRIMARY KEY (`registerId`);
+
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`transId`);
+
+
+ALTER TABLE `account`
+  MODIFY `accountId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `customer`
+  MODIFY `customerId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `register`
+  MODIFY `registerId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `transaction`
+  MODIFY `transId` int(10) NOT NULL AUTO_INCREMENT;

@@ -1,9 +1,19 @@
 <?php 
+session_start();
+
+if(!isset($_SESSION['user'])){
+    header("Location: login.php");
+	  exit();
+}
+else{
+    $customerId = $_SESSION['user'];
+}
+
     require ("config.php");
 
     $sql = "select firstName, lastName, accountBalance  
     FROM `customer` c join `account` a
-    ON c.customerId = a.customerId";
+    ON c.customerId = a.customerId ";
 
     $result = mysqli_query($link,$sql);
     $row = mysqli_fetch_assoc($result);
@@ -46,7 +56,7 @@
         <a class="nav-link" href="#">查詢明細</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">登出</a>
+        <a class="nav-link" href="login.php?logout=1">登出</a>
     </li>
     </ul>
 
