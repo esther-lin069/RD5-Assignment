@@ -28,8 +28,7 @@ else{
     <title>Document</title>
     <link rel="stylesheet" href="scss/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
 </head>
 <body>
@@ -42,8 +41,9 @@ else{
 
             <div id="account">
                 <h2 id="welcome">Hi,<span><?= $row['firstName'] ?></sapn></h2>
-                <h3>帳戶餘額: <lable>＊＊＊</lable><div id="show">
-                    <span id="money"><?= $row['accountBalance']?></span>元</div>
+                <h3>帳戶餘額:
+                    <lable id="stars" class="div_hide">＊＊＊</lable> 
+                    <div id="accountBalance"><span id="money"><?= $row['accountBalance']?></span>元</div>
                 <a id="iconEye" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a></h3>
             </div>
             <div id="actionBtn">
@@ -61,12 +61,10 @@ else{
     <script>
         $(function(){
         
-        $("#show").css("display","none");
             $("#iconEye").click(function(){
-                //$("#iconEye i").toggleClass("fa fa-slash");
-                $("#iconEye").empty();
-                $("#account h3 lable").text('');
-                $("#show").css("display","block");
+                $("#iconEye i").toggleClass("far fa-eye-slash");
+                $("#stars").toggleClass("div_hide");
+                $("#accountBalance").toggleClass("div_hide");
             })
             //這裡還要再研究
         })
