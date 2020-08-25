@@ -44,8 +44,8 @@ else{
             <a id="iconEye" href="#" role="button"><span class="fa fa-eye-slash"></span></span></a></h3>
 
             <div id="actionBtn">
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">提款</a>
-                <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">存款</a>
+                <a href="withdraw.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">提款</a>
+                <a href="deposit.php" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">存款</a>
             </div>
         </div>
         <div class="col"></div>

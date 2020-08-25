@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$max = 100000;
 
 if(!isset($_SESSION['user'])){
     header("Location: login.php");
@@ -10,12 +11,13 @@ else{
 }
 
 if(isset($_POST['submit'])){
-    if(!isset($_POST['amount']) && $_POST['amount'] == ''){
+    if(!isset($_POST['amount']) && $_POST['amount'] == '' && $_POST['amount'] < $max){
         exit;
     }
     $amount = $_POST['amount'];
     require ("config.php");
-
+    try{
+    //存款對象是自己，取出的是自己的帳戶id
     $sql_getacc = "SELECT accountId from account where customerId = '$customerId'";
     $result = mysqli_query($link,$sql_getacc);
     $accountId = mysqli_fetch_row($result);
@@ -31,6 +33,14 @@ if(isset($_POST['submit'])){
 
     mysqli_query($link,$sql_trans);
     mysqli_query($link,$sql_acc);
+
+    }
+    catch(Exception $e){
+        echo 'Message:' .$e->getMessage();
+    }
+
+header("Location: index.php");
+mysqli_close($link);
 
 }
 ?>
@@ -70,7 +80,10 @@ if(isset($_POST['submit'])){
                         <div class="invalid-feedback">Check this checkbox to continue.</div>
                     </label>
                 </div>
-                <button name="submit" type="submit" class="btn btn-primary">Deposit!</button>
+                <div class="form-group">
+                    <button name="submit" type="submit" class="btn btn-info">我要存款!</button>
+                    <a href="index.php" class="btn btn-outline-dark" role="button">取消</a>
+                </div>
             </form>
         </div>
         <div class="col"></div>

@@ -10,14 +10,14 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="withdraw.php">提款</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">轉帳</a>
+        <a class="dropdown-item disabled" href="#">轉帳</a>
         </div>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="info.php">個人資料</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">查詢明細</a>
+        <a class="nav-link" href="transaction.php">查詢明細</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="login.php?logout=1">登出</a>
