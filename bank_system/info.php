@@ -11,9 +11,9 @@ else{
 
     require ("config.php");
 
-    $sql = "select firstName, lastName, accountBalance  
-    FROM `customer` c join `account` a
-    ON c.customerId = a.customerId where c.customerId = '$customerId'";
+    $sql = "select (select `accountNum` from `account` 
+    where `customerId` = c.customerId)as accountNum, `firstName`, `lastName`, `phone`, `email` from `customer` as c 
+    where c.customerId = '$customerId'";
 
     $result = mysqli_query($link,$sql);
     $row = mysqli_fetch_assoc($result);
@@ -34,19 +34,31 @@ else{
 </head>
 <body>
 <div class="container">
-    <?php include("nav.php"); ?>
+<?php include("nav.php"); ?>
 
     <div id="main" class="row">
         <div class="col"></div>
         <div id="content" class="col-8">
-            <h2 id="welcome">Hi,<span><?= $row['firstName'] ?></sapn></h2>
-            <h3>帳戶餘額: <label id="money"><?= $row['accountBalance']?></label>元
-            <a id="iconEye" href="#" role="button"><span class="fa fa-eye-slash"></span></span></a></h3>
+            <!-- put content here -->
+            <table class="table">
+                <tr>
+                <th scope="row">帳號</th>
+                    <td><?= $row['accountNum'] ?></td>
+                </tr>
+                <tr>
+                <th scope="row">戶名</th>
+                    <td><?= $row['firstName'] ?>.<?= $row['lastName'] ?></td>
+                </tr>
+                <tr>
+                <th scope="row">電話</th>
+                    <td><?= $row['phone'] ?></td>
+                </tr>
+                <tr>
+                <th scope="row">電子郵件</th>
+                    <td><?= $row['email'] ?></td>
+                </tr>
 
-            <div id="actionBtn">
-                <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">提款</a>
-                <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">存款</a>
-            </div>
+            </table>
         </div>
         <div class="col"></div>
     </div>
@@ -57,11 +69,7 @@ else{
     
     <script>
         $(function(){
-            $("#iconEye").click(function(){
-                $("#iconEye span").toggleClass("fa fa-eye");
-                $("#money").text("＊＊＊");
-            })
-            //這裡還要再研究
+            
         })
     </script>
     
