@@ -10,6 +10,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="scss/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
 </head>
@@ -41,7 +42,9 @@
         <div class="col"></div>
         <div id="content" class="col-8">
             <h2 id="welcome">Hi,XXX</h2>
-            <h3>帳戶餘額: <label id="money">1000</label>元</h3>
+            <h3>帳戶餘額: <label id="money">1000</label>元
+            <a href="#" role="button"><span class="fa fa-eye-slash"></span></span></a></h3>
+
             <div id="actionBtn">
                 <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">提款</a>
                 <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">存款</a>
