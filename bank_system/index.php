@@ -39,10 +39,13 @@ else{
     <div id="main" class="row">
         <div class="col"></div>
         <div id="content" class="col-8">
-            <h2 id="welcome">Hi,<span><?= $row['firstName'] ?></sapn></h2>
-            <h3>帳戶餘額: <label id="money"><?= $row['accountBalance']?></label>元
-            <a id="iconEye" href="#" role="button"><span class="fa fa-eye-slash"></span></span></a></h3>
 
+            <div id="account">
+                <h2 id="welcome">Hi,<span><?= $row['firstName'] ?></sapn></h2>
+                <h3>帳戶餘額: <lable>＊＊＊</lable><div id="show">
+                    <span id="money"><?= $row['accountBalance']?></span>元</div>
+                <a id="iconEye" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a></h3>
+            </div>
             <div id="actionBtn">
                 <a href="withdraw.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">提款</a>
                 <a href="deposit.php" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">存款</a>
@@ -57,9 +60,13 @@ else{
     
     <script>
         $(function(){
+        
+        $("#show").css("display","none");
             $("#iconEye").click(function(){
-                $("#iconEye span").toggleClass("fa fa-eye");
-                $("#money").text("＊＊＊");
+                //$("#iconEye i").toggleClass("fa fa-slash");
+                $("#iconEye").empty();
+                $("#account h3 lable").text('');
+                $("#show").css("display","block");
             })
             //這裡還要再研究
         })
