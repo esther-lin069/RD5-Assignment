@@ -6,9 +6,9 @@
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">動作</a>
         <div class="dropdown-menu">
         <a class="dropdown-item" href="#"></a>
-        <a class="dropdown-item" href="#">存款</a>
+        <a class="dropdown-item" href="deposit.php">存款</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">提款</a>
+        <a class="dropdown-item" href="withdraw.php">提款</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="#">轉帳</a>
         </div>
