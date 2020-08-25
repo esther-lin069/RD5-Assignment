@@ -15,21 +15,24 @@ if(isset($_POST['submit'])){
         exit;
     }
     $amount = $_POST['amount'];
+
     require ("config.php");
     try{
     //存款對象是自己，取出的是自己的帳戶id
-    $sql_getacc = "SELECT accountId from account where customerId = '$customerId'";
+    $sql_getacc = "SELECT accountId,accountBalance from account where customerId = '$customerId'";
     $result = mysqli_query($link,$sql_getacc);
-    $accountId = mysqli_fetch_row($result);
+    $account = mysqli_fetch_row($result);
+
+ 
 
     $sql_trans = "insert into `transaction` 
     (`transId`, `accountId`, `transAccount`, `transType`, `transAmount`, `transDate`) 
     VALUES (NULL, (SELECT accountId from account where customerId = '$customerId'),
-    (SELECT accountNum from account where accountId = '$accountId[0]'), '存款', '$amount', CURRENT_TIMESTAMP);
+    (SELECT accountNum from account where accountId = '$account[0]'), '存款', '$amount', CURRENT_TIMESTAMP);
     ";
 
     $sql_acc = "update `account` set `accountBalance` = `accountBalance` + '$amount' 
-    where `account`.`accountId` = '$accountId[0]';";
+    where `account`.`accountId` = '$account[0]';";
 
     mysqli_query($link,$sql_trans);
     mysqli_query($link,$sql_acc);

@@ -42,9 +42,11 @@ else{
             <div id="account">
                 <h2 id="welcome">Hi,<span><?= $row['firstName'] ?></sapn></h2>
                 <h3>帳戶餘額:
-                    <lable id="stars" class="div_hide">＊＊＊</lable> 
-                    <div id="accountBalance"><span id="money"><?= $row['accountBalance']?></span>元</div>
-                <a id="iconEye" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a></h3>
+                <h3>
+                    <p id="stars">＊＊＊</p> 
+                    <p id="accountBalance" class="div_hide"><span id="money"><?= $row['accountBalance']?></span>元</p>
+                    <a id="iconEye" href="#" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                </h3>
             </div>
             <div id="actionBtn">
                 <a href="withdraw.php" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">提款</a>

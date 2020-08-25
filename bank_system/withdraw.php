@@ -18,28 +18,35 @@ if(isset($_POST['submit'])){
     require ("config.php");
     try{
     //提款對象是自己，取出的是自己的帳戶id
-    $sql_getacc = "SELECT accountId from account where customerId = '$customerId'";
+    $sql_getacc = "SELECT accountId,accountBalance from account where customerId = '$customerId'";
     $result = mysqli_query($link,$sql_getacc);
-    $accountId = mysqli_fetch_row($result);
+    $account = mysqli_fetch_row($result);
+
+    //驗證金額    
+    if($account[1] < $amount){
+        echo '<script language="javascript">';
+        echo 'alert("餘額不足！")';
+        echo '</script>';        
+    }
 
     $sql_trans = "insert into `transaction` 
     (`transId`, `accountId`, `transAccount`, `transType`, `transAmount`, `transDate`) 
-    VALUES (NULL, '$accountId[0]',
-    (SELECT accountNum from account where accountId = '$accountId[0]'), '提款', '$amount', CURRENT_TIMESTAMP);
+    VALUES (NULL, '$account[0]',
+    (SELECT accountNum from account where accountId = '$account[0]'), '提款', '$amount', CURRENT_TIMESTAMP);
     ";
 
     $sql_acc = "update `account` set `accountBalance` = `accountBalance` - '$amount' 
-    where `account`.`accountId` = '$accountId[0]';";
+    where `account`.`accountId` = '$account[0]';";
 
-    mysqli_query($link,$sql_trans);
-    mysqli_query($link,$sql_acc);
+    //mysqli_query($link,$sql_trans);
+    //mysqli_query($link,$sql_acc);
 
     }
     catch(Exception $e){
         echo 'Message:' .$e->getMessage();
     }
 
-    header("Location: index.php");
+    //header("Location: index.php");
     mysqli_close($link);
 
 }
