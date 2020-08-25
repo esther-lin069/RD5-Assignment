@@ -1,0 +1,24 @@
+#main {
+  background-color: #e6f5fa;
+  padding-top: 100px;
+  border-radius: 0.5em;
+  height: 800px;
+}
+
+#nav-bar {
+  margin: 20px;
+}
+
+.nav-item {
+  margin-right: 15px;
+}
+
+#content #money {
+  font-size: 100pt;
+}
+
+#content #actionBtn {
+  margin-top: 50px;
+  float: right;
+}
+/*# sourceMappingURL=main.css.map */

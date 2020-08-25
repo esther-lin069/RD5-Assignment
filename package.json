@@ -1,0 +1,19 @@
+{
+  "name": "rd5-assignment",
+  "version": "1.0.0",
+  "description": "bank",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esther-lin069/RD5-Assignment.git"
+  },
+  "author": "Esther",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esther-lin069/RD5-Assignment/issues"
+  },
+  "homepage": "https://github.com/esther-lin069/RD5-Assignment#readme"
+}
