@@ -11,9 +11,22 @@ if(isset($_POST['submit'])){
     $email = $_POST['email'];
     
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    
+    //驗證帳號是否已存在
+    $sql_verify = "select * from `register` WHERE `username` = '$username'";
+    $result = mysqli_query($link,$sql_verify);
+    @$row_num = mysqli_num_rows($result);
 
-    try{
+
+    if($row_num != 0){
+        echo ("<script LANGUAGE='JavaScript'>
+                window.alert('該帳號已存在');
+                window.history.go(-2);
+                </script>");
+        exit;
+    }
+    else{
         $sql_customer = "insert into `customer` values (null,'$firstName','$lastName','$photoId','$phone','$email')";
         mysqli_query($link,$sql_customer);
         $inserted = mysqli_insert_id($link);
@@ -21,6 +34,7 @@ if(isset($_POST['submit'])){
         $sql_register = "insert into `register` values (null, $inserted,'$username','$password')";
         mysqli_query($link,$sql_register);
 
+        //帳號格式為yymd+7碼整數尾數為accountId,共15碼
         $iNum = str_pad($inserted, 7, '0', STR_PAD_LEFT);
         $accountNum = date("yymd").$iNum;
         echo($accountNum);
@@ -28,12 +42,7 @@ if(isset($_POST['submit'])){
         $sql_account = "insert into `account` values (null, $inserted,'$accountNum',0)";
         mysqli_query($link,$sql_account);
     }
-    catch(Exception $e){
-        echo 'Message:' .$e->getMessage();
-    }
-
     
-
     header("Location: login.php");
     mysqli_close($link);
 
@@ -67,7 +76,7 @@ if(isset($_POST['submit'])){
             </div>
             <div class="form-group">
                 <label for="password">Password</label> 
-                <input id="password" name="password" type="text" class="form-control" required>
+                <input id="password" name="password" type="password" class="form-control" required>
             </div>    <br>
             <div class="form-group"> 
                 <a id="next" href="#userData" role="button" class="btn btn-primary">Next</a>
@@ -107,6 +116,9 @@ if(isset($_POST['submit'])){
 
 <script>
     $(function(){
+
+        $("#username").val('');
+
         $("#next").click(function(){
             var inputList = $("#userData div :input");
             if(inputList.eq(0).val().length > 20 || inputList.eq(1).val().length > 20){
@@ -119,7 +131,7 @@ if(isset($_POST['submit'])){
             else
                 alert("請填入預註冊之帳號密碼!");
             
-            //待作帳號存在之驗證以及包含非法字符
+            //非法字符?
             
         });
     });

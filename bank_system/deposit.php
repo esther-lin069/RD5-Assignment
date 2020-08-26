@@ -12,6 +12,9 @@ else{
 
 if(isset($_POST['submit'])){
     if(!isset($_POST['amount']) && $_POST['amount'] == '' && $_POST['amount'] < $max){
+        echo '<script language="javascript">';
+        echo 'alert("輸入金額有誤或是超過上限！")';
+        echo '</script>'; 
         exit;
     }
     $amount = $_POST['amount'];

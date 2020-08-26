@@ -38,15 +38,15 @@ if(isset($_POST['submit'])){
     $sql_acc = "update `account` set `accountBalance` = `accountBalance` - '$amount' 
     where `account`.`accountId` = '$account[0]';";
 
-    //mysqli_query($link,$sql_trans);
-    //mysqli_query($link,$sql_acc);
+    mysqli_query($link,$sql_trans);
+    mysqli_query($link,$sql_acc);
 
     }
     catch(Exception $e){
         echo 'Message:' .$e->getMessage();
     }
 
-    //header("Location: index.php");
+    header("Location: index.php");
     mysqli_close($link);
 
 }

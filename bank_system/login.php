@@ -15,16 +15,20 @@ if(isset($_POST['submit'])){
 
 
     if(trim($username) != ''){
-        $sql = "select * from `register` WHERE `username` = '$username' and `password` = '$password'" ;
+        $sql = "select * from `register` WHERE `username` = '$username'" ;
         $result = mysqli_query($link,$sql);
         @$row_num = mysqli_num_rows($result);
         $row = mysqli_fetch_assoc($result);
 
-        if($row_num != 0){
-            $_SESSION['user'] = $row['customerId'];
-            echo "welcome!{$username}";
-            header("Location: index.php");
-            exit;
+        if($row_num != 0 ){
+            if(password_verify($password,$row['password'])){
+                $_SESSION['user'] = $row['customerId'];
+                header("Location: index.php");
+                exit;
+            }
+            else{
+                echo "wrong password";
+            }
           }
         else
             echo "wrong username or password";

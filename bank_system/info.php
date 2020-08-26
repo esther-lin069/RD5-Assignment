@@ -47,7 +47,7 @@ else{
                 </tr>
                 <tr>
                 <th scope="row">戶名</th>
-                    <td><?= $row['firstName'] ?>.<?= $row['lastName'] ?></td>
+                    <td><?= $row['firstName'] ." ". $row['lastName'] ?></td>
                 </tr>
                 <tr>
                 <th scope="row">電話</th>
