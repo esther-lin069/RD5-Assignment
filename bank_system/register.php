@@ -126,7 +126,7 @@ if(isset($_POST['submit'])){
             var password = inputList.eq(1).val();
 
             if(username.length > 30 || password.length > 30){
-                alert("帳號密碼字元數皆為20以內");
+                alert("帳號密碼字元數皆為30以內");
             }
             var re = /^(?=.*\d)(?=.*[a-zA-Z]).{6,30}$/;
             if(!re.test(username) || !re.test(password)){
