@@ -95,11 +95,11 @@ if(isset($_POST['submit'])){
             </div>
             <div class="form-group">
                 <label for="photoId">PhotoID</label> 
-                <input id="photoId" name="photoId" type="text" class="form-control" value="A123456789" pattern="[A-Z]\d{9}" required>
+                <input id="photoId" name="photoId" type="text" class="form-control" placeholder="A123456789" pattern="[A-Z]\d{9}" required>
             </div>
             <div class="form-group">
                 <label for="phone">Phone</label> 
-                <input id="phone" name="phone" type="text" class="form-control" value="0910234567" pattern="\d{10}" required> 
+                <input id="phone" name="phone" type="text" class="form-control" placeholder="0910234567" pattern="\d{10}" required> 
             </div><!--placeholder -->
             <div class="form-group">
                 <label for="email">Email</label> 
@@ -119,17 +119,25 @@ if(isset($_POST['submit'])){
 
         $("#username").val('');
 
-        $("#next").click(function(){
+        $("#next").click(function(){        
+
             var inputList = $("#userData div :input");
-            if(inputList.eq(0).val().length > 20 || inputList.eq(1).val().length > 20){
+            var username = inputList.eq(0).val();
+            var password = inputList.eq(1).val();
+
+            if(username.length > 30 || password.length > 30){
                 alert("帳號密碼字元數皆為20以內");
             }
-            else if(inputList.eq(0).val() != "" && inputList.eq(1).val() != ""){
+            var re = /^(?=.*\d)(?=.*[a-zA-Z]).{6,30}$/;
+            if(!re.test(username) || !re.test(password)){
+                alert("帳號密碼為6-30碼英數混合");
+            }
+            else if(inputList.eq(0).val().trim() != "" && inputList.eq(1).val().trim() != ""){
                 $("#userData").css('display','none'); 
                 $("#userInfo").css('display','block');
             }
             else
-                alert("請填入預註冊之帳號密碼!");
+                alert("請填入欲註冊之帳號密碼!");
             
             //非法字符?
             

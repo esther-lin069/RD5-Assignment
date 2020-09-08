@@ -11,10 +11,20 @@ else{
 }
 
 if(isset($_POST['submit'])){
-    if(!isset($_POST['amount']) && $_POST['amount'] == '' && $_POST['amount'] < $max){
+    if(!isset($_POST['amount']) & !is_numeric($_POST['amount'])){
         echo '<script language="javascript">';
-        echo 'alert("輸入金額有誤或是超過上限！")';
-        echo '</script>'; 
+        echo 'alert("輸入金額有誤！")';
+        echo '</script>';
+
+        header("refresh:0.5;url=index.php"); 
+        exit;
+    }
+    if($_POST['amount'] > $max){
+        echo '<script language="javascript">';
+        echo 'alert("超出限額(10w)！")';
+        echo '</script>';
+        
+        header("refresh:0.5;url=index.php");        
         exit;
     }
     $amount = $_POST['amount'];
@@ -76,7 +86,7 @@ mysqli_close($link);
                         <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                         </div>
-                        <input id="amount" name="amount" type="text" class="form-control" placeholder="0">
+                        <input id="amount" name="amount" type="number" class="form-control" placeholder="100的倍數" min="100" step="100">
                     </div>
                 </div>
                 <div class="form-group form-check">
